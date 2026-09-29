@@ -1,0 +1,905 @@
+/* Adjusts the background color and sets it to black */
+html, body {
+
+    background-color: black;
+
+}
+
+
+/* Adjusts properties for the body */
+body {
+
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+
+/* Hides the scrollbar while keeping scrolling enabled */
+html,
+body {
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+
+}
+
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+
+    display: none;
+
+    width: 0;
+    height: 0;
+
+}
+
+
+/* Adjusts properties for the overlay image */
+.pageoverlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+}
+
+
+/* Adjusts properties for normal text */
+.normaltext,
+.menu {
+
+    color: #cdaaf9;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 21px;
+
+    font-weight: normal;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    white-space: pre-wrap;
+
+    text-shadow:
+        0 0 5px #cdaaf9,
+        0 0 12px #cdaaf9;
+
+}
+
+
+/* Adjusts properties for the Orion logo */
+#logo {
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: 380px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.30);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 0 5px #cdaaf9)
+        drop-shadow(0 0 12px #cdaaf9);
+
+}
+
+
+/* Starts the logo power-on effect */
+#logo.logo-flicker {
+
+    animation:
+        logoPowerOn
+        2.4s
+        linear
+        forwards;
+
+}
+
+
+/* Controls the logo power-on flicker */
+@keyframes logoPowerOn {
+
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.035;
+    }
+
+    9% {
+        opacity: 0.015;
+    }
+
+    13% {
+        opacity: 0.055;
+    }
+
+    17% {
+        opacity: 0;
+    }
+
+    23% {
+        opacity: 0.045;
+    }
+
+    27% {
+        opacity: 0.075;
+    }
+
+    30% {
+        opacity: 0.025;
+    }
+
+    34% {
+        opacity: 0.065;
+    }
+
+    38% {
+        opacity: 0;
+    }
+
+    44% {
+        opacity: 0.055;
+    }
+
+    48% {
+        opacity: 0.085;
+    }
+
+    51% {
+        opacity: 0.035;
+    }
+
+    55% {
+        opacity: 0.095;
+    }
+
+    59% {
+        opacity: 0.02;
+    }
+
+    64% {
+        opacity: 0.10;
+    }
+
+    68% {
+        opacity: 0.045;
+    }
+
+    72% {
+        opacity: 0.115;
+    }
+
+    76% {
+        opacity: 0.035;
+    }
+
+    80% {
+        opacity: 0.125;
+    }
+
+    84% {
+        opacity: 0.075;
+    }
+
+    87% {
+        opacity: 0.135;
+    }
+
+    90% {
+        opacity: 0.10;
+    }
+
+    93% {
+        opacity: 0.145;
+    }
+
+    95% {
+        opacity: 0.125;
+    }
+
+    97% {
+        opacity: 0.15;
+    }
+
+    100% {
+        opacity: 0.15;
+    }
+
+}
+
+
+/* Adjusts the appearance of the typing cursor */
+.cursor {
+
+    display: inline-block;
+
+    width: 8px;
+    height: 16px;
+
+    margin-left: 4px;
+
+    background-color: #cdaaf9;
+
+    vertical-align: middle;
+
+    position: relative;
+
+    top: 1px;
+
+}
+
+
+/* Makes the cursor blink when it is stationary */
+.cursor.blinking {
+
+    animation:
+        cursorBlink
+        0.8s
+        infinite;
+
+}
+
+
+/* Controls the cursor blinking */
+@keyframes cursorBlink {
+
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* Makes text flicker out before disappearing */
+.flicker-out {
+
+    animation:
+        flickerOut
+        0.9s
+        linear
+        forwards;
+
+}
+
+
+/* Controls the text flicker-out effect */
+@keyframes flickerOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    10% {
+        opacity: 0.2;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    30% {
+        opacity: 0.1;
+    }
+
+    40% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 0.5;
+    }
+
+    70% {
+        opacity: 0.1;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    90% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* Adjusts the menu width */
+.menu {
+
+    display: block;
+
+    width: 100%;
+
+}
+
+
+/* Makes the entire menu option line clickable */
+.menu-button {
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #cdaaf9;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 21px;
+
+    font-weight: normal;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    text-shadow:
+        0 0 5px #cdaaf9,
+        0 0 12px #cdaaf9;
+
+}
+
+
+/* Keeps menu options unchanged in every state */
+.menu-button:hover,
+.menu-button:focus,
+.menu-button:focus-visible,
+.menu-button:disabled {
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #cdaaf9;
+
+    opacity: 1;
+
+    text-shadow:
+        0 0 5px #cdaaf9,
+        0 0 12px #cdaaf9;
+
+}
+
+
+/* Creates blank lines between menu sections */
+.menu-spacing {
+
+    height: 1.7em;
+
+}
+
+
+/* Centers gallery images */
+.gallery-image {
+
+    display: block;
+
+    width: 500px;
+
+    max-width: 80vw;
+
+    height: auto;
+
+    margin: 30px auto;
+
+}
+
+
+/* Creates the gallery container */
+.gallery-container {
+
+    width: 100%;
+
+    padding-bottom: 20px;
+
+}
+
+
+/* Adjusts the large main gallery image */
+.gallery-main {
+
+    display: block;
+
+    width: 650px;
+
+    max-width: 80vw;
+
+    height: auto;
+
+    margin: 25px auto 20px;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(0 0 5px #cdaaf9)
+        drop-shadow(0 0 12px #cdaaf9);
+
+}
+
+
+/* Creates the row containing the smaller gallery tiles */
+.gallery-tiles {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+}
+
+
+/* Adjusts the smaller gallery tiles */
+.gallery-tile {
+
+    display: block;
+
+    width: 180px;
+    height: 130px;
+
+    padding: 0;
+
+    border: 1px solid #cdaaf9;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    box-shadow:
+        0 0 5px #cdaaf9,
+        0 0 12px rgba(205, 170, 249, 0.45);
+
+}
+
+
+/* Adjusts the images inside the gallery tiles */
+.gallery-tile img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* Keeps gallery tiles visually unchanged */
+.gallery-tile:hover,
+.gallery-tile:focus,
+.gallery-tile:focus-visible {
+
+    border: 1px solid #cdaaf9;
+
+    outline: none;
+
+    background: transparent;
+
+}
+
+
+/* Starts the gallery image power-on effect */
+.gallery-main.gallery-flicker,
+.gallery-tile.gallery-flicker {
+
+    animation:
+        galleryPowerOn
+        1.4s
+        linear
+        forwards;
+
+}
+
+
+/* Controls the gallery image power-on flicker */
+@keyframes galleryPowerOn {
+
+    0% {
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 0.08;
+    }
+
+    14% {
+        opacity: 0.02;
+    }
+
+    21% {
+        opacity: 0.15;
+    }
+
+    28% {
+        opacity: 0.04;
+    }
+
+    35% {
+        opacity: 0.25;
+    }
+
+    43% {
+        opacity: 0.08;
+    }
+
+    51% {
+        opacity: 0.40;
+    }
+
+    59% {
+        opacity: 0.15;
+    }
+
+    67% {
+        opacity: 0.55;
+    }
+
+    75% {
+        opacity: 0.30;
+    }
+
+    83% {
+        opacity: 0.70;
+    }
+
+    90% {
+        opacity: 0.50;
+    }
+
+    95% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+/* Adds extra space below the gallery selection prompt */
+.gallery-selection {
+
+    padding-bottom: 60px;
+
+}
+
+
+/* Creates the image viewing overlay */
+.gallery-viewer {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+
+    cursor: pointer;
+
+}
+
+
+/* Creates the separate black background */
+.gallery-viewer-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.92);
+
+    opacity: 0;
+
+}
+
+
+/* Starts the gallery viewer background fade-in */
+.gallery-viewer-background.gallery-viewer-fade-in {
+
+    animation:
+        galleryViewerFadeIn
+        0.9s
+        ease-out
+        forwards;
+
+}
+
+
+/* Starts the gallery viewer background fade-out */
+.gallery-viewer-background.gallery-viewer-fade-out {
+
+    animation:
+        galleryViewerFadeOut
+        0.9s
+        ease-in
+        forwards;
+
+}
+
+
+/* Controls the gallery viewer background fade-in */
+@keyframes galleryViewerFadeIn {
+
+    0% {
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* Controls the gallery viewer background fade-out */
+@keyframes galleryViewerFadeOut {
+
+    0% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* Creates the container for the image and credit */
+.gallery-viewer-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    transform:
+        translateY(100vh);
+
+    opacity: 1;
+
+}
+
+
+/* Starts the image and credit slide-in */
+.gallery-viewer-content.gallery-viewer-slide-in {
+
+    animation:
+        galleryViewerSlideIn
+        0.9s
+        ease-out
+        forwards;
+
+}
+
+
+/* Starts the image and credit slide-out */
+.gallery-viewer-content.gallery-viewer-slide-out {
+
+    animation:
+        galleryViewerSlideOut
+        0.9s
+        ease-in
+        forwards;
+
+}
+
+
+/* Controls the image and credit slide-in */
+@keyframes galleryViewerSlideIn {
+
+    0% {
+
+        transform:
+            translateY(100vh);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* Controls the image and credit slide-out */
+@keyframes galleryViewerSlideOut {
+
+    0% {
+
+        transform:
+            translateY(0);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translateY(100vh);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* Adjusts the enlarged gallery image */
+.gallery-viewer img {
+
+    display: block;
+
+    max-width: 85vw;
+    max-height: 75vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    opacity: 1;
+
+    filter:
+        drop-shadow(0 0 5px #cdaaf9)
+        drop-shadow(0 0 12px #cdaaf9);
+
+}
+
+
+/* Adjusts the artist credit position */
+.gallery-credit {
+
+    margin-top: 15px;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    opacity: 1;
+
+}
+
+
+/* Keeps the image and credit from closing the viewer */
+.gallery-viewer img,
+.gallery-credit {
+
+    cursor: default;
+
+}
+
+
+/* Adjusts gallery layout on smaller screens */
+@media (max-width: 700px) {
+
+    .gallery-main {
+
+        width: 80vw;
+
+    }
+
+
+    .gallery-tiles {
+
+        gap: 10px;
+
+        width: 90%;
+
+    }
+
+
+    .gallery-tile {
+
+        width: 35vw;
+        height: 25vw;
+
+    }
+
+}
