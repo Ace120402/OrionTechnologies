@@ -262,6 +262,18 @@ body::-webkit-scrollbar {
 }
 
 
+/* Keeps the BIOS cursor beside the text while typing */
+#bios-text .cursor {
+
+    display: inline-block;
+
+    flex: none;
+
+    vertical-align: middle;
+
+}
+
+
 /* Makes the cursor blink when it is stationary */
 .cursor.blinking {
 
@@ -346,6 +358,7 @@ body::-webkit-scrollbar {
 
     100% {
         opacity: 0;
+
     }
 
 }
@@ -925,6 +938,18 @@ body::-webkit-scrollbar {
         box-sizing: border-box;
 
         touch-action: none;
+
+    }
+
+
+    /* Keeps the BIOS cursor beside the text */
+    #bios-text .cursor {
+
+        display: inline-block;
+
+        flex: none;
+
+        vertical-align: middle;
 
     }
 
