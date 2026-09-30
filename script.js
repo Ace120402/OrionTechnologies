@@ -315,11 +315,7 @@ function typeText(
 
     /* Waits before typing begins */
     setTimeout(
-        function () {
-
-            type();
-
-        },
+        type,
         delay
     );
 
@@ -443,6 +439,115 @@ function typeText(
 }
 
 
+/* Types normal menu text using the shared settings */
+function typeMenuText(
+    element,
+    text,
+    callback,
+    cursor
+) {
+
+    typeText(
+        element,
+        text,
+        typingSpeed,
+        0,
+        false,
+        0,
+        callback,
+        cursor,
+        false
+    );
+
+}
+
+
+/* Creates a shared typing cursor */
+function createCursor() {
+
+    const cursor =
+        document.createElement(
+            "span"
+        );
+
+
+    cursor.classList.add(
+        "cursor"
+    );
+
+
+    return cursor;
+
+}
+
+
+/* Creates a selection prompt */
+function createSelection(
+    container,
+    extraClass = ""
+) {
+
+    const selection =
+        document.createElement(
+            "div"
+        );
+
+
+    selection.classList.add(
+        "menu-selection"
+    );
+
+
+    if (
+        extraClass
+    ) {
+
+        selection.classList.add(
+            extraClass
+        );
+
+    }
+
+
+    container.appendChild(
+        selection
+    );
+
+
+    return selection;
+
+}
+
+
+/* Types the final selection prompt */
+function typeSelection(
+    selection,
+    cursor,
+    finish
+) {
+
+    typeMenuText(
+        selection,
+        "SELECTION > ",
+
+        function () {
+
+            cursor.classList.add(
+                "blinking"
+            );
+
+
+            finish();
+
+        },
+
+        cursor
+
+    );
+
+}
+
+
 /* =========================
    MENU CREATION
 ========================= */
@@ -518,6 +623,23 @@ function createSpacing(
 
 
     return spacing;
+
+}
+
+
+/* Enables a menu option */
+function enableButton(
+    button
+) {
+
+    if (
+        button
+    ) {
+
+        button.disabled =
+            false;
+
+    }
 
 }
 
@@ -635,48 +757,27 @@ function typeMenu(
     }
 
 
-    /* Creates selection area */
     createSpacing(
         menu
     );
 
 
+    /* Creates selection area */
     const selection =
-        document.createElement(
-            "div"
+        createSelection(
+            menu
         );
-
-
-    selection.classList.add(
-        "menu-selection"
-    );
-
-
-    menu.appendChild(
-        selection
-    );
 
 
     /* Creates one shared cursor */
     const cursor =
-        document.createElement(
-            "span"
-        );
-
-
-    cursor.classList.add(
-        "cursor"
-    );
+        createCursor();
 
 
     /* Types the header */
-    typeText(
+    typeMenuText(
         header,
         title,
-        typingSpeed,
-        0,
-        false,
-        0,
 
         function () {
 
@@ -686,9 +787,7 @@ function typeMenu(
 
         },
 
-        cursor,
-
-        false
+        cursor
 
     );
 
@@ -710,13 +809,9 @@ function typeMenu(
         }
 
 
-        typeText(
+        typeMenuText(
             buttons[index].button,
             buttons[index].option.text,
-            typingSpeed,
-            0,
-            false,
-            0,
 
             function () {
 
@@ -726,9 +821,7 @@ function typeMenu(
 
             },
 
-            cursor,
-
-            false
+            cursor
 
         );
 
@@ -742,78 +835,52 @@ function typeMenu(
             !returnButton
         ) {
 
-            typeSelection();
+            typeFinalSelection();
 
             return;
 
         }
 
 
-        typeText(
+        typeMenuText(
             returnButton,
             returnOption.text,
-            typingSpeed,
-            0,
-            false,
-            0,
-
-            typeSelection,
-
-            cursor,
-
-            false
-
+            typeFinalSelection,
+            cursor
         );
 
     }
 
 
-    /* Types the selection prompt */
-    function typeSelection() {
+    /* Types and enables the selection prompt */
+    function typeFinalSelection() {
 
-        typeText(
+        typeSelection(
             selection,
-            "SELECTION > ",
-            typingSpeed,
-            0,
-            false,
-            0,
+            cursor,
 
             function () {
-
-                cursor.classList.add(
-                    "blinking"
-                );
-
 
                 buttons.forEach(
                     function (item) {
 
-                        item.button.disabled =
-                            false;
+                        enableButton(
+                            item.button
+                        );
 
                     }
                 );
 
 
-                if (
+                enableButton(
                     returnButton
-                ) {
-
-                    returnButton.disabled =
-                        false;
-
-                }
+                );
 
 
-                menuTyping = false;
+                menuTyping =
+                    false;
 
-            },
-
-            cursor,
-
-            false
-
+            }
         );
 
     }
@@ -925,7 +992,7 @@ function selectMenuOption(
     );
 
 
-    /* Replaces the selection prompt with the selected number */
+    /* Replaces the cursor with the selected number */
     if (
         selection
     ) {
@@ -1007,7 +1074,7 @@ function showArchivesMenu() {
 ========================= */
 
 
-/* Creates a page with a title, content, RETURN and selection */
+/* Creates a standard text page */
 function showPage(
     titleText,
     contentText,
@@ -1049,7 +1116,6 @@ function showPage(
     );
 
 
-    /* Starts the page at the top */
     page.scrollTop = 0;
 
 
@@ -1088,13 +1154,12 @@ function showPage(
     );
 
 
-    /* Creates blank line above RETURN */
+    /* Creates RETURN */
     createSpacing(
         page
     );
 
 
-    /* Creates RETURN button */
     const returnButton =
         createMenuButton(
             currentMenu[0],
@@ -1102,7 +1167,6 @@ function showPage(
         );
 
 
-    /* Creates blank line below RETURN */
     createSpacing(
         page
     );
@@ -1110,115 +1174,65 @@ function showPage(
 
     /* Creates selection prompt */
     const selection =
-        document.createElement(
-            "div"
+        createSelection(
+            page
         );
-
-
-    selection.classList.add(
-        "menu-selection"
-    );
-
-
-    page.appendChild(
-        selection
-    );
 
 
     /* Creates one shared cursor */
     const cursor =
-        document.createElement(
-            "span"
-        );
+        createCursor();
 
 
-    cursor.classList.add(
-        "cursor"
-    );
-
-
-    /* Types the title */
-    typeText(
+    /* Types the page */
+    typeMenuText(
         title,
         titleText,
-        typingSpeed,
-        0,
-        false,
-        0,
 
         function () {
 
-            typeText(
+            typeMenuText(
                 content,
                 contentText,
-                typingSpeed,
-                0,
-                false,
-                0,
 
                 function () {
 
-                    typeText(
+                    typeMenuText(
                         returnButton,
                         "[ 00 ] RETURN",
-                        typingSpeed,
-                        0,
-                        false,
-                        0,
 
                         function () {
 
-                            typeText(
+                            typeSelection(
                                 selection,
-                                "SELECTION > ",
-                                typingSpeed,
-                                0,
-                                false,
-                                0,
+                                cursor,
 
                                 function () {
-
-                                    cursor.classList.add(
-                                        "blinking"
-                                    );
-
 
                                     returnButton.disabled =
                                         false;
 
-
                                     menuTyping =
                                         false;
 
-                                },
-
-                                cursor,
-
-                                false
-
+                                }
                             );
 
                         },
 
-                        cursor,
-
-                        false
+                        cursor
 
                     );
 
                 },
 
-                cursor,
-
-                false
+                cursor
 
             );
 
         },
 
-        cursor,
-
-        false
+        cursor
 
     );
 
@@ -1230,7 +1244,7 @@ function showPage(
 ========================= */
 
 
-/* Creates the gallery viewer */
+/* Opens an enlarged gallery image */
 function openGalleryImage(
     imageSource,
     artist
@@ -1290,7 +1304,6 @@ function openGalleryImage(
         );
 
 
-    /* Uses the normal site text style for the artist credit */
     credit.classList.add(
         "normaltext",
         "gallery-credit"
@@ -1321,7 +1334,6 @@ function openGalleryImage(
     );
 
 
-    /* Adds the viewer to the page */
     document.body.appendChild(
         viewer
     );
@@ -1357,7 +1369,6 @@ function openGalleryImage(
                 background
             ) {
 
-                /* Fades the black background out */
                 background.classList.remove(
                     "gallery-viewer-fade-in"
                 );
@@ -1368,7 +1379,6 @@ function openGalleryImage(
                 );
 
 
-                /* Slides the image and credit down */
                 viewerContent.classList.remove(
                     "gallery-viewer-slide-in"
                 );
@@ -1453,86 +1463,128 @@ function createGalleryTile(
 }
 
 
+/* Adds gallery tiles from a data list */
+function addGalleryTiles(
+    container,
+    images
+) {
+
+    images.forEach(
+        function (item) {
+
+            container.appendChild(
+                createGalleryTile(
+                    item[0],
+                    item[1]
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ACE gallery image data */
+const aceGalleryImages = [
+
+    [
+        "images/aceref.png",
+        "[ JoltzDrawz ]"
+    ],
+
+    [
+        "images/acesweet.jpeg",
+        "[ sweeetlii ]"
+    ],
+
+    [
+        "images/acemb.png",
+        "[ Madnessbliss ]"
+    ]
+
+];
+
+
+/* EOS gallery image data */
+const eosGalleryImages = [
+
+    [
+        "images/eosref.png",
+        "[ JoltzDrawz ]"
+    ],
+
+    [
+        "images/eosfc.png",
+        "[ fixy_cookies ]"
+    ],
+
+    [
+        "images/eosmb.png",
+        "[ Madnessbliss ]"
+    ],
+
+    [
+        "images/eosvr.jpeg",
+        "[ Gelboretsu ]"
+    ],
+
+    [
+        "images/eoszl1.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl2.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl3.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl4.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl5.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl6.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl7.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl8.png",
+        "[ Zestylemonss ]"
+    ],
+
+    [
+        "images/eoszl9.png",
+        "[ Zestylemonss ]"
+    ]
+
+];
+
+
 /* Creates an ACE gallery */
 function createACEGallery() {
 
-    const gallery =
-        document.createElement(
-            "div"
-        );
-
-
-    gallery.classList.add(
-        "gallery-container"
+    return createGallery(
+        "images/acemain.png",
+        "ACE",
+        aceGalleryImages
     );
-
-
-    /* Creates the large ACE image */
-    const mainImage =
-        document.createElement(
-            "img"
-        );
-
-
-    mainImage.classList.add(
-        "gallery-main"
-    );
-
-
-    mainImage.src =
-        "images/acemain.png";
-
-    mainImage.alt =
-        "ACE";
-
-
-    gallery.appendChild(
-        mainImage
-    );
-
-
-    /* Creates the smaller ACE tiles */
-    const tiles =
-        document.createElement(
-            "div"
-        );
-
-
-    tiles.classList.add(
-        "gallery-tiles"
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/aceref.png",
-            "[ JoltzDrawz ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/acesweet.jpeg",
-            "[ sweeetlii ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/acemb.png",
-            "[ Madnessbliss ]"
-        )
-    );
-
-
-    gallery.appendChild(
-        tiles
-    );
-
-
-    return gallery;
 
 }
 
@@ -1540,6 +1592,22 @@ function createACEGallery() {
 /* Creates an EOS gallery */
 function createEOSGallery() {
 
+    return createGallery(
+        "images/eosmain.png",
+        "EOS",
+        eosGalleryImages
+    );
+
+}
+
+
+/* Creates a gallery from image data */
+function createGallery(
+    mainSource,
+    mainAlt,
+    images
+) {
+
     const gallery =
         document.createElement(
             "div"
@@ -1551,7 +1619,7 @@ function createEOSGallery() {
     );
 
 
-    /* Creates the large EOS image */
+    /* Creates the large main image */
     const mainImage =
         document.createElement(
             "img"
@@ -1564,10 +1632,10 @@ function createEOSGallery() {
 
 
     mainImage.src =
-        "images/eosmain.png";
+        mainSource;
 
     mainImage.alt =
-        "EOS";
+        mainAlt;
 
 
     gallery.appendChild(
@@ -1575,7 +1643,7 @@ function createEOSGallery() {
     );
 
 
-    /* Creates the smaller EOS tiles */
+    /* Creates the smaller image tiles */
     const tiles =
         document.createElement(
             "div"
@@ -1587,107 +1655,9 @@ function createEOSGallery() {
     );
 
 
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eosref.png",
-            "[ JoltzDrawz ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eosfc.png",
-            "[ fixy_cookies ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eosmb.png",
-            "[ Madnessbliss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eosvr.jpeg",
-            "[ Gelboretsu ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl1.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl2.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl3.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl4.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl5.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl6.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl7.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl8.png",
-            "[ Zestylemonss ]"
-        )
-    );
-
-
-    tiles.appendChild(
-        createGalleryTile(
-            "images/eoszl9.png",
-            "[ Zestylemonss ]"
-        )
+    addGalleryTiles(
+        tiles,
+        images
     );
 
 
@@ -1768,17 +1738,15 @@ function showGalleryPage(
     );
 
 
-    /* Starts the gallery at the top of the page */
     page.scrollTop = 0;
 
 
-    /* Creates blank line above RETURN */
+    /* Creates RETURN */
     createSpacing(
         page
     );
 
 
-    /* Creates RETURN button */
     const returnButton =
         createMenuButton(
             currentMenu[0],
@@ -1786,7 +1754,6 @@ function showGalleryPage(
         );
 
 
-    /* Creates blank line below RETURN */
     createSpacing(
         page
     );
@@ -1794,38 +1761,15 @@ function showGalleryPage(
 
     /* Creates selection prompt */
     const selection =
-        document.createElement(
-            "div"
+        createSelection(
+            page,
+            "gallery-selection"
         );
-
-
-    /* Identifies the selection prompt */
-    selection.classList.add(
-        "menu-selection"
-    );
-
-
-    /* Adds extra space below the selection prompt */
-    selection.classList.add(
-        "gallery-selection"
-    );
-
-
-    page.appendChild(
-        selection
-    );
 
 
     /* Creates one shared cursor */
     const cursor =
-        document.createElement(
-            "span"
-        );
-
-
-    cursor.classList.add(
-        "cursor"
-    );
+        createCursor();
 
 
     /* Gets the gallery images */
@@ -1869,51 +1813,30 @@ function showGalleryPage(
     setTimeout(
         function () {
 
-            typeText(
+            typeMenuText(
                 returnButton,
                 "[ 00 ] RETURN",
-                typingSpeed,
-                0,
-                false,
-                0,
 
                 function () {
 
-                    typeText(
+                    typeSelection(
                         selection,
-                        "SELECTION > ",
-                        typingSpeed,
-                        0,
-                        false,
-                        0,
+                        cursor,
 
                         function () {
-
-                            cursor.classList.add(
-                                "blinking"
-                            );
-
 
                             returnButton.disabled =
                                 false;
 
-
                             menuTyping =
                                 false;
 
-                        },
-
-                        cursor,
-
-                        false
-
+                        }
                     );
 
                 },
 
-                cursor,
-
-                false
+                cursor
 
             );
 
