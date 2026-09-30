@@ -942,8 +942,32 @@ body::-webkit-scrollbar {
     }
 
 
+    /* Keeps the BIOS menu centered as one block */
+    #bios-text > .menu:not(.scroll-page) {
+
+        display: block;
+
+        width: 100%;
+
+        text-align: center;
+
+        flex: none;
+
+    }
+
+
+    /* Keeps the BIOS text and cursor together */
+    #bios-text > .menu:not(.scroll-page) .bios-content {
+
+        display: inline;
+
+        white-space: pre-wrap;
+
+    }
+
+
     /* Keeps the BIOS cursor beside the text */
-    #bios-text .cursor {
+    #bios-text > .menu:not(.scroll-page) .cursor {
 
         display: inline-block;
 
