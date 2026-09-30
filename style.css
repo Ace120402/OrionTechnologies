@@ -994,14 +994,20 @@ body::-webkit-scrollbar {
 
         touch-action: pan-y;
 
-        display: block;
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: flex-start;
 
         flex: none;
 
     }
 
 
-    /* Keeps gallery content in normal vertical order */
+    /* Keeps gallery content above the menu controls */
     .scroll-page .gallery-container {
 
         position: relative;
@@ -1012,32 +1018,125 @@ body::-webkit-scrollbar {
 
         height: auto;
 
+        flex: 0 0 auto;
+
+        margin: 0;
+
+        padding: 0 0 20px;
+
+        box-sizing: border-box;
+
     }
 
 
-    /* Adjusts the main gallery image on mobile */
-    .gallery-main {
+    /* Keeps the main gallery image in normal document flow */
+    .scroll-page .gallery-main {
+
+        position: relative;
+
+        display: block;
 
         width: 80vw;
 
+        height: auto;
+
+        margin: 25px auto 20px;
+
+        flex: 0 0 auto;
+
     }
 
 
-    /* Adjusts the gallery tile spacing on mobile */
-    .gallery-tiles {
+    /* Keeps all gallery tiles in normal document flow */
+    .scroll-page .gallery-tiles {
+
+        position: relative;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
 
         gap: 10px;
 
         width: 90%;
 
+        margin: 0 auto;
+
+        flex: 0 0 auto;
+
     }
 
 
-    /* Adjusts the gallery tile size on mobile */
-    .gallery-tile {
+    /* Keeps gallery tiles in normal document flow */
+    .scroll-page .gallery-tile {
+
+        position: relative;
+
+        flex: 0 0 auto;
 
         width: 35vw;
+
         height: 25vw;
+
+    }
+
+
+    /* Forces spacing after the gallery to stay below it */
+    .scroll-page .menu-spacing {
+
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+
+        height: 1.7em;
+
+        flex: 0 0 auto;
+
+        clear: both;
+
+    }
+
+
+    /* Forces RETURN to remain below the gallery */
+    .scroll-page .menu-button {
+
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        flex: 0 0 auto;
+
+        z-index: 10;
+
+    }
+
+
+    /* Keeps the selection prompt below RETURN */
+    .scroll-page .gallery-selection {
+
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        flex: 0 0 auto;
+
+        padding-bottom: 60px;
+
+        z-index: 10;
 
     }
 
