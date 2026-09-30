@@ -926,10 +926,7 @@ function selectMenuOption(
         cursor
     ) {
 
-        cursor.remove();
-
-
-        selection.appendChild(
+        cursor.replaceWith(
             document.createTextNode(
                 option.key
             )
