@@ -996,6 +996,22 @@ body::-webkit-scrollbar {
 
         display: block;
 
+        flex: none;
+
+    }
+
+
+    /* Keeps gallery content in normal vertical order */
+    .scroll-page .gallery-container {
+
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
     }
 
 
