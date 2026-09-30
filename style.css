@@ -1017,16 +1017,16 @@ body::-webkit-scrollbar {
     }
 
 
-    /* Keeps the overlay locked to the screen */
+    /* Keeps the overlay slightly larger than the screen */
     .pageoverlay {
 
         position: fixed;
 
-        top: 0;
-        left: 0;
+        top: -5%;
+        left: -5%;
 
-        width: 100%;
-        height: 100%;
+        width: 110%;
+        height: 110%;
 
         object-fit: cover;
 
