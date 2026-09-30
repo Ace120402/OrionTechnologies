@@ -533,6 +533,10 @@ function typeMenu(
 
     element.textContent = "";
 
+    element.classList.remove(
+        "selection-made"
+    );
+
 
     const menu =
         document.createElement(
@@ -876,6 +880,10 @@ function flickerMenu(
                 "flicker-out"
             );
 
+            screen.classList.remove(
+                "selection-made"
+            );
+
 
             /* Waits before showing the next menu */
             setTimeout(
@@ -911,7 +919,13 @@ function selectMenuOption(
         );
 
 
-    /* Replaces the entire selection prompt */
+    /* Marks the screen as having a selection */
+    screen.classList.add(
+        "selection-made"
+    );
+
+
+    /* Replaces the selection prompt with the selected number */
     if (
         selection
     ) {
@@ -921,20 +935,6 @@ function selectMenuOption(
             option.key;
 
     }
-
-
-    /* Removes any remaining cursors from the screen */
-    screen
-        .querySelectorAll(
-            ".cursor"
-        )
-        .forEach(
-            function (cursor) {
-
-                cursor.remove();
-
-            }
-        );
 
 
     /* Flickers the menu after showing the selected number */
@@ -947,6 +947,7 @@ function selectMenuOption(
     );
 
 }
+
 
 /* =========================
    MENUS
@@ -2045,7 +2046,6 @@ setTimeout(
 
 
         screen.textContent = "";
-
 
         screen.appendChild(
             bios

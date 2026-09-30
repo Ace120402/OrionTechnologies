@@ -285,6 +285,14 @@ body::-webkit-scrollbar {
 }
 
 
+/* Hides the cursor after a menu option has been selected */
+#bios-text.selection-made .cursor {
+
+    display: none !important;
+
+}
+
+
 /* Controls the cursor blinking */
 @keyframes cursorBlink {
 
