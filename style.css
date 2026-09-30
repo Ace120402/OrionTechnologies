@@ -879,6 +879,98 @@ body::-webkit-scrollbar {
 /* Adjusts gallery layout on smaller screens */
 @media (max-width: 700px) {
 
+    /* Prevents the entire page from moving when scrolling */
+    html,
+    body {
+
+        width: 100%;
+
+        height: 100%;
+
+        min-height: 100%;
+
+        overflow: hidden;
+
+    }
+
+
+    /* Keeps the main site content locked to the viewport */
+    #bios-text {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: none;
+
+    }
+
+
+    /* Hides the mobile content scrollbar */
+    #bios-text::-webkit-scrollbar {
+
+        display: none;
+
+        width: 0;
+        height: 0;
+
+    }
+
+
+    /* Keeps the logo centered relative to the viewport */
+    #logo {
+
+        position: fixed;
+
+        top: 50%;
+        left: 50%;
+
+        width: 75vw;
+
+        max-width: 380px;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.30);
+
+    }
+
+
+    /* Keeps the overlay locked to the viewport */
+    .pageoverlay {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        object-fit: cover;
+
+    }
+
+
+    /* Adjusts the main gallery image on mobile */
     .gallery-main {
 
         width: 80vw;
@@ -886,6 +978,7 @@ body::-webkit-scrollbar {
     }
 
 
+    /* Adjusts the gallery tile spacing on mobile */
     .gallery-tiles {
 
         gap: 10px;
@@ -895,6 +988,7 @@ body::-webkit-scrollbar {
     }
 
 
+    /* Adjusts the gallery tile size on mobile */
     .gallery-tile {
 
         width: 35vw;
