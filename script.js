@@ -1965,7 +1965,7 @@ document.addEventListener(
 setTimeout(
     function () {
 
-        /* Creates the BIOS text container */
+        /* Creates the BIOS container */
         const bios =
             document.createElement(
                 "div"
@@ -1974,6 +1974,23 @@ setTimeout(
 
         bios.classList.add(
             "menu"
+        );
+
+
+        /* Creates the element that holds the BIOS text */
+        const biosTextElement =
+            document.createElement(
+                "span"
+            );
+
+
+        biosTextElement.classList.add(
+            "bios-content"
+        );
+
+
+        bios.appendChild(
+            biosTextElement
         );
 
 
@@ -1987,7 +2004,7 @@ setTimeout(
 
         /* Types the BIOS text */
         typeText(
-            bios,
+            biosTextElement,
             biosText,
             typingSpeed,
             0,
