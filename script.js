@@ -911,34 +911,30 @@ function selectMenuOption(
         );
 
 
-    /* Removes every cursor currently on the screen */
-    const cursors =
-        screen.querySelectorAll(
-            ".cursor"
-        );
-
-
-    cursors.forEach(
-        function (cursor) {
-
-            cursor.remove();
-
-        }
-    );
-
-
-    /* Adds the selected number to the selection prompt */
+    /* Replaces the entire selection prompt */
     if (
         selection
     ) {
 
-        selection.appendChild(
-            document.createTextNode(
-                option.key
-            )
-        );
+        selection.textContent =
+            selection.textContent +
+            option.key;
 
     }
+
+
+    /* Removes any remaining cursors from the screen */
+    screen
+        .querySelectorAll(
+            ".cursor"
+        )
+        .forEach(
+            function (cursor) {
+
+                cursor.remove();
+
+            }
+        );
 
 
     /* Flickers the menu after showing the selected number */
