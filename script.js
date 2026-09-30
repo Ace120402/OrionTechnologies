@@ -643,6 +643,11 @@ function typeMenu(
         );
 
 
+    selection.classList.add(
+        "menu-selection"
+    );
+
+
     menu.appendChild(
         selection
     );
@@ -899,11 +904,20 @@ function selectMenuOption(
     }
 
 
-    /* Gets the currently displayed cursor */
-    const cursor =
+    /* Gets the selection prompt */
+    const selection =
         screen.querySelector(
-            ".cursor"
+            ".menu-selection"
         );
+
+
+    /* Gets the cursor inside the selection prompt */
+    const cursor =
+        selection
+            ? selection.querySelector(
+                ".cursor"
+            )
+            : null;
 
 
     /* Adds the selected number before the cursor */
@@ -1103,6 +1117,11 @@ function showPage(
         document.createElement(
             "div"
         );
+
+
+    selection.classList.add(
+        "menu-selection"
+    );
 
 
     page.appendChild(
@@ -1782,6 +1801,12 @@ function showGalleryPage(
         document.createElement(
             "div"
         );
+
+
+    /* Identifies the selection prompt */
+    selection.classList.add(
+        "menu-selection"
+    );
 
 
     /* Adds extra space below the selection prompt */

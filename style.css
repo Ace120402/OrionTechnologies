@@ -374,6 +374,14 @@ body::-webkit-scrollbar {
 }
 
 
+/* Identifies the selection prompt */
+.menu-selection {
+
+    width: 100%;
+
+}
+
+
 /* Makes the entire menu option line clickable */
 .menu-button {
 
@@ -1052,6 +1060,21 @@ body::-webkit-scrollbar {
         justify-content: flex-start;
 
         flex: none;
+
+        scrollbar-width: none;
+
+        -ms-overflow-style: none;
+
+    }
+
+
+    /* Hides the scrollbar in Chrome, Edge and Safari */
+    .scroll-page::-webkit-scrollbar {
+
+        display: none;
+
+        width: 0;
+        height: 0;
 
     }
 
