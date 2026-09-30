@@ -307,10 +307,54 @@ function typeText(
         "1";
 
 
-    /* Places the cursor on the screen */
-    element.appendChild(
-        cursor
-    );
+    /*
+        Keeps BIOS text and its cursor
+        inside the same flex item
+    */
+    const isBIOS =
+        element === screen;
+
+
+    let typingContainer =
+        element;
+
+
+    if (
+        isBIOS
+    ) {
+
+        typingContainer =
+            document.createElement(
+                "span"
+            );
+
+
+        typingContainer.style.display =
+            "inline";
+
+
+        typingContainer.style.whiteSpace =
+            "pre-wrap";
+
+
+        element.appendChild(
+            typingContainer
+        );
+
+
+        typingContainer.appendChild(
+            cursor
+        );
+
+    }
+    else {
+
+        /* Places the cursor normally for menus and pages */
+        element.appendChild(
+            cursor
+        );
+
+    }
 
 
     /* Waits before typing begins */
@@ -346,12 +390,15 @@ function typeText(
                 )
             );
 
+
             index++;
+
 
             setTimeout(
                 type,
                 speed
             );
+
 
             return;
 
