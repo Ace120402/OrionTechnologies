@@ -899,6 +899,36 @@ function selectMenuOption(
     }
 
 
+    /* Gets the currently displayed cursor */
+    const cursor =
+        screen.querySelector(
+            ".cursor"
+        );
+
+
+    /* Adds the selected number before the cursor */
+    if (
+        cursor
+    ) {
+
+        cursor.classList.remove(
+            "blinking"
+        );
+
+        cursor.style.opacity =
+            "1";
+
+
+        cursor.before(
+            document.createTextNode(
+                option.key
+            )
+        );
+
+    }
+
+
+    /* Flickers the menu after showing the selected number */
     flickerMenu(
         function () {
 
