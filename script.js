@@ -1,4 +1,36 @@
 /* =========================
+   MOBILE TOUCH CONTROLS
+========================= */
+
+
+/* Prevents the main screen from moving when swiping */
+document.addEventListener(
+    "touchmove",
+    function (event) {
+
+        /* Allows scrolling inside pages that are meant to scroll */
+        if (
+            event.target.closest(
+                ".scroll-page"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        /* Prevents the main Orion screen from moving */
+        event.preventDefault();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================
    CONSTANTS
 ========================= */
 
@@ -967,13 +999,18 @@ function showPage(
 
 
     page.classList.add(
-        "menu"
+        "menu",
+        "scroll-page"
     );
 
 
     screen.appendChild(
         page
     );
+
+
+    /* Starts the page at the top */
+    page.scrollTop = 0;
 
 
     /* Creates the title */
@@ -1670,7 +1707,8 @@ function showGalleryPage(
 
 
     page.classList.add(
-        "menu"
+        "menu",
+        "scroll-page"
     );
 
 
@@ -1683,6 +1721,10 @@ function showGalleryPage(
     page.appendChild(
         galleryContent
     );
+
+
+    /* Starts the gallery at the top of the page */
+    page.scrollTop = 0;
 
 
     /* Creates blank line above RETURN */
