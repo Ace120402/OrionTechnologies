@@ -1017,18 +1017,23 @@ body::-webkit-scrollbar {
     }
 
 
-    /* Keeps the overlay slightly larger than the screen */
+    /* Keeps the overlay extended beyond the Safari viewport edges */
     .pageoverlay {
 
         position: fixed;
 
-        top: -5%;
-        left: -5%;
+        top: 0;
+        left: 0;
 
-        width: 110%;
-        height: 110%;
+        width: 100%;
+        height: 100%;
 
         object-fit: cover;
+
+        transform:
+            scale(1.20);
+
+        transform-origin: center center;
 
         touch-action: none;
 
