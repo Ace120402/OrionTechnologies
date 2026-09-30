@@ -1079,6 +1079,14 @@ body::-webkit-scrollbar {
     }
 
 
+    /* Vertically centers text-only pages */
+    .scroll-page.text-page {
+
+        justify-content: center;
+
+    }
+
+
     /* Keeps gallery content above the menu controls */
     .scroll-page .gallery-container {
 

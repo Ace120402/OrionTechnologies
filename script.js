@@ -920,20 +920,16 @@ function selectMenuOption(
             : null;
 
 
-    /* Adds the selected number before the cursor */
+    /* Replaces the cursor with the selected number */
     if (
+        selection &&
         cursor
     ) {
 
-        cursor.classList.remove(
-            "blinking"
-        );
-
-        cursor.style.opacity =
-            "1";
+        cursor.remove();
 
 
-        cursor.before(
+        selection.appendChild(
             document.createTextNode(
                 option.key
             )
@@ -1044,7 +1040,8 @@ function showPage(
 
     page.classList.add(
         "menu",
-        "scroll-page"
+        "scroll-page",
+        "text-page"
     );
 
 
