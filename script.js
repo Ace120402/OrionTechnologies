@@ -890,7 +890,7 @@ function flickerMenu(
 }
 
 
- /* Handles menu selection */
+/* Handles menu selection */
 function selectMenuOption(
     option
 ) {
@@ -911,27 +911,27 @@ function selectMenuOption(
         );
 
 
-    /* Removes every cursor from the selection prompt */
+    /* Removes every cursor currently on the screen */
+    const cursors =
+        screen.querySelectorAll(
+            ".cursor"
+        );
+
+
+    cursors.forEach(
+        function (cursor) {
+
+            cursor.remove();
+
+        }
+    );
+
+
+    /* Adds the selected number to the selection prompt */
     if (
         selection
     ) {
 
-        const cursors =
-            selection.querySelectorAll(
-                ".cursor"
-            );
-
-
-        cursors.forEach(
-            function (cursor) {
-
-                cursor.remove();
-
-            }
-        );
-
-
-        /* Adds the selected number */
         selection.appendChild(
             document.createTextNode(
                 option.key
